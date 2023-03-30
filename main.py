@@ -9,6 +9,7 @@ def home():
     # CPU bilgileri
     cpu_usage = psutil.cpu_percent()
     cpu_count = psutil.cpu_count()
+    per_cpu = psutil.cpu_percent(percpu=True)
 
     # Bellek bilgileri
     mem = psutil.virtual_memory()
@@ -38,6 +39,7 @@ def home():
     return render_template("index.html",
                            cpu_usage=cpu_usage,
                            cpu_count=cpu_count,
+                           per_cpu=per_cpu,
                            total_mem=total_mem,
                            used_mem=used_mem,
                            available_mem=available_mem,
