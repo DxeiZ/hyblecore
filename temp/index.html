@@ -8,36 +8,99 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   </head>
     <body>
-        <div class="container text-center">
+        <div class="ps-3 pt-3">
             <div class="row">
-              <div class="col-8">col-8</div>
+              <div class="col-8">
+		 <div class="row">
+		  <div class="col-sm-6 mb-3 mb-sm-0">
+		      	<div class="card overflow-y-scroll" style="height: 200px;">
+			  <div class="card-body">
+			    <h5 class="card-title fw-bold sticky-top bg-dark text-white p-3 font-monospace">CPU</h5>
+			    <table class="table table-striped-columns">
+				  <tbody>
+				    <tr>
+				      <th scope="row" class="font-monospace">Kullanım</th>
+				      <td class="font-monospace">{{ cpu_usage }}%</td>
+				    </tr>
+				    <tr>
+				   <tbody>
+				   <th scope="row" class="font-monospace">CPU'lar</th>
+				   <td class="font-monospace">{{ cpu_count }}</td>
+				    {% for cpu in per_cpu %}
+				    <tr>
+				      <th scope="row" class="font-monospace fw-medium ps-4">{{ loop.index }}</th>
+				      <td class="font-monospace">{{ cpu }}%</td>
+				    </tr>
+				    {% endfor %}
+				  </tbody>
+				  </tbody>
+			    </table>
+			  </div>
+			</div>
+		  </div>
+		  <div class="col-sm-6">
+		      	<div class="card overflow-y-scroll" style="height: 200px;">
+			  <div class="card-body">
+			    <h5 class="card-title fw-bold sticky-top bg-dark text-white p-3 font-monospace">Bellek</h5>
+			    <table class="table table-striped-columns">
+				  <tbody>
+				    <tr>
+				      <th scope="row" class="font-monospace">Toplam</th>
+				      <td class="font-monospace">{{ total_mem }} MB</td>
+				    </tr>
+				    <tr>
+				      <th scope="row" class="font-monospace">Kullanılan</th>
+				      <td class="font-monospace">{{ used_mem }} MB</td>
+				    </tr>
+				     <tr>
+				      <th scope="row" class="font-monospace">Boşta olan</th>
+				      <td class="font-monospace">{{ available_mem }} MB</td>
+				    </tr>
+				  </tbody>
+			    </table>
+			  </div>
+			</div>
+		  </div>
+		  <div class="col mt-3">
+		      	<div class="card overflow-y-scroll" style="height: 400px;">
+			  <div class="card-body">
+			    <h5 class="card-title fw-bold sticky-top bg-dark text-white p-3 font-monospace">İşlemler</h5>
+				<table class="table">
+				  <tbody>
+				  {% for process in processes %}
+				    <tr>
+				      <th scope="row" class="font-monospace">{{ process.pid }}</th>
+				      <td class="font-monospace">{{ process.name }}</td>
+				      <td class="font-monospace">{{ process.username }}</td>
+				    </tr>
+				    {% endfor %}
+				  </tbody>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		  <div class="col mt-3 mb-3">
+		      	<div class="card overflow-y-scroll" style="height: 200px;">
+			  <div class="card-body">
+			    <h5 class="card-title fw-bold sticky-top bg-dark text-white p-3 font-monospace">Açık Portlar</h5>
+				<table class="table">
+				  <tbody>
+				  {% for port in open_ports %}
+				    <tr>
+				      <th scope="row" class="font-monospace">{{ port }}</th>
+				      <td class="font-monospace badge text-bg-success">Açık</td>
+				    </tr>
+				    {% endfor %}
+				  </tbody>
+				</table>
+			  </div>
+			</div>
+		  </div>
+		</div>
+               </div>
               <div class="col-4">col-4</div>
             </div>
           </div>
-        <h1>Sistem Bilgileri</h1>
-
-        <h2>CPU</h2>
-        <p>Kullanım: {{ cpu_usage }}%</p>
-        <p>Sayı: {{ cpu_count }}</p>
-
-        <h2>Bellek</h2>
-        <p>Toplam: {{ total_mem }} MB</p>
-        <p>Kullanılan: {{ used_mem }} MB</p>
-        <p>Boşta olan: {{ available_mem }} MB</p>
-
-        <h2>İşlemler</h2>
-        <ul>
-            {% for process in processes %}
-            <li>{{ process.pid }} - {{ process.name }} - {{ process.username }}</li>
-            {% endfor %}
-        </ul>
-
-        <h2>Açık Portlar</h2>
-        <ul>
-            {% for port in open_ports %}
-            <li>Port {{ port }}: Açık</li>
-            {% endfor %}
-        </ul>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     </body>
 </html>
